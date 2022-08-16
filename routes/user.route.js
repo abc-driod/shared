@@ -1,0 +1,15 @@
+const express = require("express");
+const validate = require("../middlewares/validateToken");
+const router = express.Router();
+const AuthController = require("../controllers/user.controller");
+router.post("/register", AuthController.Registration);
+router.post("/login", AuthController.login);
+router.post("/generate_id_token", AuthController.generateIdToken);
+router.post("/login_with_id_token", AuthController.veryfyIdToken);
+router.post("/update", AuthController.update);
+router.get("/all_users",AuthController.allUsers);
+router.get("/test",AuthController.test);
+router.get("/all_users_with_age", validate.validateToken,AuthController.allUsersAge);
+router.get("/am_i_logged_in",validate.validateToken,AuthController.verify);
+router.post("/delete",validate.validateToken,AuthController.delete);
+module.exports = router;
